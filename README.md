@@ -2,7 +2,15 @@
 
 Make a Postgres database on RDS, create and store the admin password in Secrets Manager, use Atlas to create database schemas and tables
 
-Estimated cost
+
+## Install [Atlas](https://atlasgo.io/getting-started)
+
+You will need to install the Atlas provider before running a Terraform plan:
+
+> curl -sSf https://atlasgo.sh | sh
+
+
+## Estimated cost
 
 ```
 Project: gordonmurray/terraform_aws_rds_postgres_atlas
@@ -35,3 +43,11 @@ Project: gordonmurray/terraform_aws_rds_postgres_atlas
   ∙ 1 x aws_secretsmanager_secret_version
   ∙ 1 x aws_security_group
 ```
+
+## Clean up
+
+Use `terraform destry` to clean up.
+
+AWS Secrets manager won't fully delete the secret. You can delete it using the CLI if you want to, using:
+
+> aws secretsmanager delete-secret --secret-id postgres_admin --force-delete-without-recovery --region eu-west-1 --profile [YOUR PROFILE]
