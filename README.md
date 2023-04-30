@@ -9,6 +9,43 @@ You will need to install the Atlas provider before running a Terraform plan:
 
 > curl -sSf https://atlasgo.sh | sh
 
+Create a schema and a table in HCL format, for example:
+
+```
+schema "public" {}
+schema "imdb" {}
+
+table "movies" {
+    schema = schema.imdb
+    column "movie_id" {
+        type = int not null
+    }
+    column "name" {
+        type = varchar
+    }
+    column "certificate" {
+        type = varchar
+    }
+    column "playtime" {
+        type = int
+    }
+    column "release_date" {
+        type = date
+    }
+    column "details" {
+        type = varchar
+    }
+
+}
+```
+
+Then run terraform to create the Postgres instance in RDS and create the schema and table also
+
+```
+terraform init
+terraform apply
+```
+
 
 ## Estimated cost
 
